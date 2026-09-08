@@ -41,6 +41,82 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 .strip p{color:#cfcbc4;margin-bottom:24px;}
 footer{border-top:1px solid var(--line-default);padding:32px 0;text-align:center;color:var(--ink-500);font-size:13px;}
 @media (max-width:760px){.grid{grid-template-columns:1fr;}.navlinks{gap:16px;font-size:13px;}}
+
+/* ---- Product showcase / slideshow ---- */
+.showcase{padding:24px 0 72px;}
+.stage{position:relative;max-width:900px;margin:56px auto 0;padding:0 24px 60px;}
+.float-card{position:absolute;background:var(--surface-card);border:1px solid var(--line-default);border-radius:12px;box-shadow:0 16px 40px -18px rgba(28,27,25,.28);overflow:hidden;z-index:1;}
+.float-1{width:220px;top:-34px;left:-10px;animation:floatA 7s ease-in-out infinite;}
+.float-2{width:190px;bottom:-10px;right:-6px;animation:floatB 8.5s ease-in-out infinite;}
+@keyframes floatA{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-16px) rotate(-2deg);}}
+@keyframes floatB{0%,100%{transform:translateY(0) rotate(3deg);}50%{transform:translateY(14px) rotate(5deg);}}
+.mini-bar{display:flex;gap:4px;padding:8px 10px;border-bottom:1px solid var(--line-default);}
+.mini-bar span{width:6px;height:6px;border-radius:50%;background:var(--line-default);}
+.mini-body{padding:12px;}
+.mini-line{height:7px;border-radius:4px;background:var(--surface-raised);margin-bottom:7px;}
+.mini-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:99px;background:var(--accent-100);color:var(--accent-700);margin-bottom:8px;}
+
+.browser-frame{position:relative;z-index:2;background:var(--surface-card);border:1px solid var(--line-default);border-radius:14px;box-shadow:0 30px 70px -24px rgba(28,27,25,.35);overflow:hidden;}
+.browser-topbar{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line-default);background:var(--surface-raised);}
+.browser-topbar .tdot{width:10px;height:10px;border-radius:50%;}
+.tdot.r{background:#E8746B;}.tdot.y{background:#E8B65A;}.tdot.g{background:#63B583;}
+.browser-url{margin-left:8px;font-size:12px;color:var(--ink-500);background:var(--surface-card);border:1px solid var(--line-default);border-radius:6px;padding:4px 12px;flex:1;max-width:320px;}
+.slides{position:relative;min-height:400px;transition:height .4s ease;}
+.slide{position:absolute;inset:0;padding:26px 28px;opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease;pointer-events:none;overflow-y:auto;height:max-content;}
+.slide.active{opacity:1;transform:translateY(0);pointer-events:auto;}
+
+/* badges shared by mockup slides */
+.mbadge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.01em;}
+.mbadge .mdot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+.mb-info{background:#E4EEFB;color:#1D4E89;}
+.mb-accent{background:var(--accent-100);color:var(--accent-700);}
+.mb-warning{background:#FDF0DA;color:#8A5A15;}
+.mb-danger{background:#FBE4E2;color:#9C2B22;}
+.mb-success{background:#E1F3E6;color:#1F7A3D;}
+.mb-neutral{background:#EDEBE6;color:#5B564F;}
+
+/* slide 1: queue */
+.qrow{display:grid;grid-template-columns:78px 1fr 130px 100px;gap:14px;align-items:center;padding:11px 4px;border-bottom:1px solid var(--line-default);font-size:13px;}
+.qrow:last-child{border-bottom:none;}
+.qrow.qhead{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-500);font-weight:700;}
+.qkey{font-family:'IBM Plex Mono',monospace;color:var(--accent-700);font-size:12px;}
+.qsubj{color:var(--ink-900);font-weight:600;}
+.qco{color:var(--ink-500);font-size:12px;font-weight:400;display:block;margin-top:2px;}
+
+/* slide 2: ticket detail */
+.tdhead{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px;}
+.tdtitle{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;margin:2px 0 6px;color:var(--ink-900);}
+.tdmeta{font-size:12px;color:var(--ink-500);margin-bottom:16px;}
+.tddesc{font-size:13px;color:var(--ink-700);background:var(--surface-raised);border-radius:8px;padding:14px;margin-bottom:16px;}
+.reply{border:1px solid var(--line-default);border-radius:10px;padding:14px;}
+.reply-head{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--ink-900);margin-bottom:8px;}
+.reply-avatar{width:22px;height:22px;border-radius:50%;background:var(--accent-600);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.reply-body{font-size:13px;color:var(--ink-700);line-height:1.6;}
+.reply-body code{background:var(--surface-raised);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:1px 6px;border-radius:4px;color:var(--accent-700);}
+
+/* slide 3: KB article */
+.kbtitle{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;margin-bottom:6px;color:var(--ink-900);}
+.kbmeta{font-size:12px;color:var(--ink-500);margin-bottom:16px;}
+.kbh{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin:14px 0 6px;color:var(--ink-900);}
+.kbp{font-size:13px;color:var(--ink-700);line-height:1.6;margin:0 0 10px;}
+.kbquote{border-left:3px solid var(--accent-600);background:var(--accent-100);padding:10px 14px;font-size:12.5px;color:var(--accent-700);border-radius:0 6px 6px 0;margin:12px 0;}
+.kbcode{background:var(--ink-900);color:#E7E2DA;font-family:'IBM Plex Mono',monospace;font-size:12px;padding:12px 14px;border-radius:8px;margin:12px 0;overflow-x:auto;}
+
+/* slide 4: branding settings */
+.brtitle{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;margin-bottom:16px;color:var(--ink-900);}
+.brgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.brfield label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-500);margin-bottom:8px;}
+.swrow{display:flex;gap:8px;align-items:center;}
+.swatch{width:34px;height:34px;border-radius:8px;border:1px solid var(--line-default);}
+.swhex{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-700);}
+.fontpreview{border:1px solid var(--line-default);border-radius:8px;padding:14px;background:var(--surface-raised);}
+.fontpreview .fp-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;color:var(--ink-900);}
+.fontpreview .fp-b{font-size:12px;color:var(--ink-700);margin-top:4px;}
+
+.dots{display:flex;justify-content:center;gap:8px;margin-top:22px;}
+.dotnav{width:8px;height:8px;border-radius:50%;background:var(--line-default);border:none;cursor:pointer;padding:0;transition:background .2s,transform .2s;}
+.dotnav.active{background:var(--accent-600);transform:scale(1.3);}
+@media (max-width:760px){.float-card{display:none;}.qrow{grid-template-columns:48px 1fr 74px;gap:8px;padding:8px 2px;font-size:12px;}.qcol-status{display:none;}.brgrid{grid-template-columns:1fr;}.slide{padding:18px;}}
 </style>
 </head>
 <body>
@@ -67,6 +143,141 @@ footer{border-top:1px solid var(--line-default);padding:32px 0;text-align:center
     </div>
   </div>
 </header>
+
+<section class="showcase">
+  <div class="wrap">
+    <h2 class="section-title">See it in action</h2>
+    <p class="section-sub">A real look at the ticket queue, conversations, knowledge base, and branding tools — exactly what your team will use day to day.</p>
+
+    <div class="stage">
+      <div class="float-card float-1">
+        <div class="mini-bar"><span></span><span></span><span></span></div>
+        <div class="mini-body">
+          <span class="mini-badge">Knowledge Base</span>
+          <div class="mini-line" style="width:90%"></div>
+          <div class="mini-line" style="width:70%"></div>
+          <div class="mini-line" style="width:80%"></div>
+        </div>
+      </div>
+      <div class="float-card float-2">
+        <div class="mini-bar"><span></span><span></span><span></span></div>
+        <div class="mini-body">
+          <span class="mini-badge" style="background:#E1F3E6;color:#1F7A3D;">Resolved</span>
+          <div class="mini-line" style="width:85%"></div>
+          <div class="mini-line" style="width:60%"></div>
+        </div>
+      </div>
+
+      <div class="browser-frame">
+        <div class="browser-topbar">
+          <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
+          <span class="browser-url" id="showcase-url">helpdesk.yourcompany.com/tickets</span>
+        </div>
+
+        <div class="slides">
+          <!-- Slide 1: Ticket Queue -->
+          <div class="slide active">
+            <div class="qrow qhead"><span>KEY</span><span>SUBJECT</span><span>PRIORITY</span><span class="qcol-status">STATUS</span></div>
+            <div class="qrow">
+              <span class="qkey">TKT-1042</span>
+              <span class="qsubj">VPN gateway intermittently dropping connections<span class="qco">Brightwave Logistics</span></span>
+              <span class="mbadge mb-warning"><span class="mdot"></span>High</span>
+              <span class="mbadge mb-accent qcol-status"><span class="mdot"></span>In Progress</span>
+            </div>
+            <div class="qrow">
+              <span class="qkey">TKT-1041</span>
+              <span class="qsubj">Onboarding checklist for 6 new hire laptops<span class="qco">Brightwave Logistics</span></span>
+              <span class="mbadge mb-neutral"><span class="mdot"></span>Medium</span>
+              <span class="mbadge mb-info qcol-status"><span class="mdot"></span>Waiting</span>
+            </div>
+            <div class="qrow">
+              <span class="qkey">TKT-1038</span>
+              <span class="qsubj">Extra monitor requested for new hire desk<span class="qco">Brightwave Logistics</span></span>
+              <span class="mbadge mb-neutral"><span class="mdot"></span>Low</span>
+              <span class="mbadge mb-info qcol-status"><span class="mdot"></span>Open</span>
+            </div>
+            <div class="qrow">
+              <span class="qkey">TKT-1035</span>
+              <span class="qsubj">Quarterly software license renewal<span class="qco">Acme Corp</span></span>
+              <span class="mbadge mb-neutral"><span class="mdot"></span>Medium</span>
+              <span class="mbadge mb-success qcol-status"><span class="mdot"></span>Resolved</span>
+            </div>
+            <div class="qrow">
+              <span class="qkey">TKT-1029</span>
+              <span class="qsubj">Printer offline on 3rd floor<span class="qco">Acme Corp</span></span>
+              <span class="mbadge mb-neutral"><span class="mdot"></span>Low</span>
+              <span class="mbadge mb-neutral qcol-status"><span class="mdot"></span>Closed</span>
+            </div>
+          </div>
+
+          <!-- Slide 2: Ticket Detail -->
+          <div class="slide">
+            <div class="tdhead">
+              <span class="mbadge mb-danger"><span class="mdot"></span>Major Incident</span>
+              <span class="mbadge mb-accent"><span class="mdot"></span>In Progress</span>
+              <span class="mbadge mb-warning"><span class="mdot"></span>High</span>
+            </div>
+            <div class="tdtitle">VPN gateway intermittently dropping connections</div>
+            <div class="tdmeta">From Jamie Rivera &middot; Brightwave Logistics &middot; TKT-1042</div>
+            <div class="tddesc">Remote staff across two warehouses are getting disconnected from the VPN every 20&ndash;30 minutes since this morning. Affecting order processing.</div>
+            <div class="reply">
+              <div class="reply-head"><span class="reply-avatar">S</span> Support Team</div>
+              <div class="reply-body">Thanks for the report — we've traced this to a firmware bug on the VPN concentrator (<code>fw-2.3.1</code>) and are rolling out a fix now. Expect full stability within the hour.</div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Knowledge Base article -->
+          <div class="slide">
+            <div class="kbtitle">How to reset your VPN client after an update</div>
+            <div class="kbmeta">Knowledge Base &middot; IT Operations &middot; Published</div>
+            <p class="kbp">If your VPN client shows a certificate error after the latest update, a local profile reset usually resolves it.</p>
+            <div class="kbh">Steps</div>
+            <p class="kbp">Quit the client completely, then clear its cached profile:</p>
+            <div class="kbcode">vpnclient --reset-profile --user $USER</div>
+            <div class="kbquote">Tip: you don't need to reinstall the client — the reset only clears the local session cache.</div>
+            <p class="kbp">Relaunch the client and sign in again with your usual credentials.</p>
+          </div>
+
+          <!-- Slide 4: Branding settings -->
+          <div class="slide">
+            <div class="brtitle">Branding &amp; Appearance</div>
+            <div class="brgrid">
+              <div class="brfield">
+                <label>Brand Colors</label>
+                <div class="swrow" style="margin-bottom:10px;">
+                  <span class="swatch" style="background:#0F6E62;"></span>
+                  <span class="swhex">#0F6E62 &middot; Primary</span>
+                </div>
+                <div class="swrow" style="margin-bottom:10px;">
+                  <span class="swatch" style="background:#1C1B19;"></span>
+                  <span class="swhex">#1C1B19 &middot; Heading</span>
+                </div>
+                <div class="swrow">
+                  <span class="swatch" style="background:#4A4744;"></span>
+                  <span class="swhex">#4A4744 &middot; Body Text</span>
+                </div>
+              </div>
+              <div class="brfield">
+                <label>Font Pairing</label>
+                <div class="fontpreview">
+                  <div class="fp-h">Space Grotesk</div>
+                  <div class="fp-b">Source Sans 3 — body copy preview</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dots" id="showcase-dots">
+      <button class="dotnav active" data-i="0" aria-label="Ticket queue"></button>
+      <button class="dotnav" data-i="1" aria-label="Ticket detail"></button>
+      <button class="dotnav" data-i="2" aria-label="Knowledge base"></button>
+      <button class="dotnav" data-i="3" aria-label="Branding settings"></button>
+    </div>
+  </div>
+</section>
 
 <section class="section">
   <div class="wrap">
@@ -121,6 +332,58 @@ footer{border-top:1px solid var(--line-default);padding:32px 0;text-align:center
     <a href="/download.html">Download</a> &middot; <a href="/archive.html">Version Archive</a> &middot; <a href="/install.html">Install Guides</a>
   </div>
 </footer>
+
+<script>
+(function(){
+  var slides = document.querySelectorAll('.showcase .slide');
+  var dots = document.querySelectorAll('.showcase .dotnav');
+  var urlBar = document.getElementById('showcase-url');
+  var urls = [
+    'helpdesk.yourcompany.com/tickets',
+    'helpdesk.yourcompany.com/tickets/1042',
+    'helpdesk.yourcompany.com/knowledge-base/vpn-reset',
+    'helpdesk.yourcompany.com/admin/branding'
+  ];
+  var slidesEl = document.querySelector('.showcase .slides');
+  var i = 0, timer;
+
+  function sizeToSlide(){
+    if (slidesEl) slidesEl.style.height = slides[i].scrollHeight + 'px';
+  }
+
+  function show(n){
+    slides[i].classList.remove('active');
+    dots[i].classList.remove('active');
+    i = (n + slides.length) % slides.length;
+    slides[i].classList.add('active');
+    dots[i].classList.add('active');
+    if (urlBar) urlBar.textContent = urls[i];
+    sizeToSlide();
+  }
+
+  function start(){
+    timer = setInterval(function(){ show(i + 1); }, 4200);
+  }
+  function stop(){ clearInterval(timer); }
+
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){
+      stop();
+      show(parseInt(d.dataset.i, 10));
+      start();
+    });
+  });
+
+  var stage = document.querySelector('.showcase .stage');
+  if (stage) {
+    stage.addEventListener('mouseenter', stop);
+    stage.addEventListener('mouseleave', start);
+  }
+
+  if (slides.length) { sizeToSlide(); start(); }
+  window.addEventListener('resize', sizeToSlide);
+})();
+</script>
 
 </body>
 </html>
