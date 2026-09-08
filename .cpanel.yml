@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/trenioti/msphelpdesk.co/
+    - /bin/cp -R index.html download.html archive.html install.html $DEPLOYPATH
