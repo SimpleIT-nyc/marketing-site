@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Version Archive — MSP Helpdesk</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--surface-page:#FAF8F4;--surface-card:#FFFFFF;--surface-raised:#F4F1EB;--line-default:#E7E2DA;--ink-900:#1C1B19;--ink-700:#4A4744;--ink-500:#837E78;--accent-700:#0A5048;--accent-600:#0F6E62;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--surface-page);color:var(--ink-900);font-family:'Source Sans 3',system-ui,sans-serif;line-height:1.5;}
+h1{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:600;margin:0 0 8px;font-size:32px;}
+a{color:var(--accent-600);}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+nav{border-bottom:1px solid var(--line-default);background:var(--surface-card);}
+nav .navwrap{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
+.brand{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;font-size:18px;color:var(--ink-900);text-decoration:none;}
+.navlinks{display:flex;gap:28px;font-size:14px;font-weight:600;}
+.navlinks a{color:var(--ink-700);text-decoration:none;}
+.navlinks a:hover{color:var(--accent-600);}
+main{padding:48px 0 80px;}
+.lead{color:var(--ink-700);margin-bottom:28px;}
+.table-wrap{background:var(--surface-card);border:1px solid var(--line-default);border-radius:10px;overflow-x:auto;}
+table{border-collapse:collapse;width:100%;font-size:14px;}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-500);padding:14px 16px;border-bottom:1px solid var(--line-default);white-space:nowrap;}
+td{padding:12px 16px;border-bottom:1px solid var(--line-default);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+.v{font-family:'IBM Plex Mono',monospace;font-weight:500;white-space:nowrap;}
+footer{border-top:1px solid var(--line-default);padding:32px 0;text-align:center;color:var(--ink-500);font-size:13px;margin-top:40px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navwrap">
+    <a href="/" class="brand">MSP Helpdesk</a>
+    <div class="navlinks">
+      <a href="/download.html">Download</a>
+      <a href="/archive.html">Archive</a>
+      <a href="/install.html">Install</a>
+      <a href="https://github.com/darshana0288/msp-helpdesk">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <h1>Version Archive</h1>
+    <p class="lead">Every previously released version, in case you need to install or roll back to a specific one. The latest release is always on the <a href="/download.html">download page</a>.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Version</th><th>Released</th><th>Changes</th><th>Size</th><th></th></tr>
+        </thead>
+        <tbody>
+<tr><td class='v'>1.0.45</td><td>2026-09-04</td><td>v1.0.45: Add heading/body color, font pairing, and font size to Branding settings</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.45.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.43</td><td>2026-09-04</td><td>v1.0.43: Humanize status/priority badges -- restrained tones instead of a rainbow per status</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.43.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.41</td><td>2026-09-02</td><td>v1.0.41: Add headings, align, undo/redo, horizontal rule, font size, and more fonts to the WYSIWYG toolbar</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.41.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.39</td><td>2026-09-02</td><td>v1.0.39: Fix customized transactional emails rendering with zero visual styling</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.39.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.38</td><td>2026-09-02</td><td>v1.0.38: Surface customer CSAT feedback (was captured but never displayed anywhere)</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.38.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.37</td><td>2026-09-02</td><td>v1.0.37: Add knowledge-base article deletion (admin-direct, agent-requested with review), force HTTPS for generated URLs</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.37.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.36</td><td>2026-09-02</td><td>v1.0.36: Fix confirmed critical and medium issues from QA_REPORT.md security audit</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.36.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.35</td><td>2026-09-02</td><td>v1.0.35: Block DatabaseSeeder demo data (hardcoded password) from ever running in production</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.35.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.34</td><td>2026-09-02</td><td>v1.0.34: Fix Enabled/Save row overlapping the toolbar on the Email Templates settings page</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.34.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.33</td><td>2026-09-01</td><td>v1.0.33: Word-style image resize/align in all WYSIWYG editors, inline-image compression, KB history cap, seeded General KB category, permission-list checkbox</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.33.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.32</td><td>2026-09-01</td><td>Wiki-style Knowledge Base: quick Edit link, full revision history, per-agent edit permission, editor byline</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.32.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.31</td><td>2026-09-01</td><td>Insert images/files directly into every WYSIWYG editor, inline</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.31.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.30</td><td>2026-09-01</td><td>Fix knowledge base pages 500ing on every article render</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.30.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.29</td><td>2026-09-01</td><td>Email template WYSIWYG editors, KB article WYSIWYG + attachments, fix /problems/create 404, contact CSV import</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.29.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.28</td><td>2026-09-01</td><td>Fix ticket page: Save Status, all field autosave, and live poll silently broken</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.28.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.26</td><td>2026-08-31</td><td>Fix duplicated left menu on the ticket detail page</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.26.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.25</td><td>2026-08-31</td><td>Fix Content-Security-Policy blocking the hCaptcha widget entirely</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.25.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.24</td><td>2026-08-31</td><td>Sidebar UX cleanup and a filterable ticket activity feed</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.24.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.23</td><td>2026-08-31</td><td>Bump version to 1.0.23</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.23.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.22</td><td>2026-08-31</td><td>Fix unreachable sidebar content on the ticket board</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.22.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.21</td><td>2026-08-31</td><td>Bump version to 1.0.21</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.21.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.20</td><td>2026-08-30</td><td>Add customizable menus and full-width responsive layouts</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.20.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.19</td><td>2026-08-30</td><td>Fix Settings page scroll lock</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.19.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.18</td><td>2026-08-30</td><td>Run system updates as durable background jobs</td><td>8.5 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.18.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.17</td><td>2026-08-30</td><td>Preserve protected runtime paths during updates</td><td>8.4 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.17.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.16</td><td>2026-08-30</td><td>Make updates timeout-safe and settings saves seamless</td><td>8.4 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.16.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.15</td><td>2026-08-30</td><td>Harden authentication, content, and updates</td><td>8.6 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.15.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.14</td><td>2026-08-30</td><td>Add configurable issue types and incident search</td><td>7.2 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.14.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.13</td><td>2026-08-30</td><td>Add signed automatic system updates</td><td>7.2 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.13.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.12</td><td>2026-08-30</td><td>Add profile cards to ticket requesters and replies</td><td>7.2 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.12.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.11</td><td>2026-08-30</td><td>Add editable system automation for agent replies</td><td>7.2 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.11.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.10</td><td>2026-08-30</td><td>Prepare updater progress verification release</td><td>7.2 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.10.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.9</td><td>2026-08-30</td><td>Add interactive update installation progress</td><td>7.2 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.9.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.8</td><td>2026-08-30</td><td>Add updater completion feedback</td><td>7.2 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.8.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.7</td><td>2026-08-30</td><td>Fix one-click update package validation</td><td>7.2 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.7.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.6</td><td>2026-08-29</td><td>Prepare corrected one-click updater test</td><td>7.2 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.6.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.5</td><td>2026-08-29</td><td>Prepare one-click updater verification release</td><td>7.2 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.5.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.4</td><td>2026-08-29</td><td>Add safe one-click system updater</td><td>7.2 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.4.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.3</td><td>2026-08-29</td><td>Fix release version validation</td><td>7.1 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.3.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.1</td><td>2026-08-29</td><td>Add cryptographic release verification</td><td>7.1 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.1.zip'>Download</a></td></tr>
+<tr><td class='v'>1.0.0</td><td>2026-08-29</td><td>Add public software release channel</td><td>7.1 MB</td><td><a href='https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.0.zip'>Download</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 MSP Helpdesk &middot; <a href="/">Home</a> &middot; <a href="/download.html">Download</a> &middot; <a href="/install.html">Install Guides</a>
+</footer>
+
+</body>
+</html>
