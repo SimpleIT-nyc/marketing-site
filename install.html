@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Installation Guides — MSP Helpdesk</title>
+<title>Installation Guides | MSP Helpdesk</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--surface-page:#FAF8F4;--surface-card:#FFFFFF;--surface-raised:#F4F1EB;--line-default:#E7E2DA;--ink-900:#1C1B19;--ink-700:#4A4744;--ink-500:#837E78;--accent-700:#0A5048;--accent-600:#0F6E62;--accent-100:#E3F1EE;--warning-100:#FBEEDD;--warning-700:#8A4E08;}
@@ -53,7 +53,7 @@ footer{border-top:1px solid var(--line-default);padding:32px 0;text-align:center
 <main>
   <div class="wrap">
     <h1>Installation Guides</h1>
-    <p class="lead">Every downloaded package already includes its PHP dependencies and compiled frontend assets — no Composer or Node.js needed on the machine you're installing to. Once the files are in place and pointed at by a web server, the app's own setup wizard (visiting the site for the first time) handles the database and admin account.</p>
+    <p class="lead">Every downloaded package already includes its PHP dependencies and compiled frontend assets: no Composer or Node.js needed on the machine you're installing to. Once the files are in place and pointed at by a web server, the app's own setup wizard (visiting the site for the first time) handles the database and admin account.</p>
 
     <div class="platform-nav">
       <a href="#windows">Windows</a>
@@ -66,8 +66,8 @@ footer{border-top:1px solid var(--line-default);padding:32px 0;text-align:center
       <h2>Windows (XAMPP)</h2>
       <p>These steps are verified against a real Windows 10 VM running XAMPP.</p>
       <ol>
-        <li>Install <strong>XAMPP for Windows 8.2.12</strong>: <a href="https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe">download link</a> (uninstall any older XAMPP first). The app requires PHP <code>^8.2</code> — 8.2, 8.3, and 8.4 all work; older versions will not run it.</li>
-        <li>Open <code>C:\xampp\php\php.ini</code>. Confirm these two lines have no <code>;</code> in front (XAMPP 8.2.12 ships with both already enabled by default — just double-check):
+        <li>Install <strong>XAMPP for Windows 8.2.12</strong>: <a href="https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe">download link</a> (uninstall any older XAMPP first). The app requires PHP <code>^8.2</code>: 8.2, 8.3, and 8.4 all work; older versions will not run it.</li>
+        <li>Open <code>C:\xampp\php\php.ini</code>. Confirm these two lines have no <code>;</code> in front (XAMPP 8.2.12 ships with both already enabled by default, just double-check):
 <pre>extension=openssl
 extension=imap</pre>
         If either has a <code>;</code> in front, remove it and save.</li>
@@ -80,7 +80,7 @@ extension=imap</pre>
 <pre>cd C:\xampp\htdocs\msp-helpdesk
 copy .env.example .env
 C:\xampp\php\php.exe artisan key:generate</pre>
-        This step is required before the first visit — without it, the site returns a 500 error instead of the setup wizard.</li>
+        This step is required before the first visit: without it, the site returns a 500 error instead of the setup wizard.</li>
         <li>Edit <code>C:\xampp\apache\conf\extra\httpd-vhosts.conf</code> and add:
 <pre>&lt;VirtualHost *:80&gt;
     DocumentRoot "C:/xampp/htdocs/msp-helpdesk/public"
@@ -92,20 +92,20 @@ C:\xampp\php\php.exe artisan key:generate</pre>
 &lt;/VirtualHost&gt;</pre>
         Using <code>localhost</code> here (not a custom hostname) avoids needing to edit the Windows hosts file at all.</li>
         <li>In XAMPP Control Panel, <strong>Stop</strong> then <strong>Start</strong> Apache to reload the config.</li>
-        <li>Visit <code>http://localhost/</code> — the setup wizard loads automatically and shows a system requirements check (all green). Click <strong>Continue</strong>, then fill in the Database &amp; Site Setup form:
+        <li>Visit <code>http://localhost/</code>. The setup wizard loads automatically and shows a system requirements check (all green). Click <strong>Continue</strong>, then fill in the Database &amp; Site Setup form:
           <ul>
             <li><strong>Site URL</strong>: leave as <code>http://localhost</code>.</li>
             <li><strong>Database Host</strong>: leave as <code>127.0.0.1</code>, <strong>Port</strong>: leave as <code>3306</code>.</li>
             <li><strong>Database Name</strong>: the database you created in step 4.</li>
-            <li><strong>Database Username</strong>: <code>root</code> — XAMPP's default MySQL user.</li>
-            <li><strong>Database Password</strong>: leave blank — XAMPP's default <code>root</code> user has no password.</li>
+            <li><strong>Database Username</strong>: <code>root</code> (XAMPP's default MySQL user).</li>
+            <li><strong>Database Password</strong>: leave blank (XAMPP's default <code>root</code> user has no password).</li>
           </ul>
         Click <strong>Test Connection &amp; Continue</strong>.</li>
       </ol>
-      <div class="warn"><strong>After that submission, you'll hit a "Not Found" page.</strong> This is expected: the installer's own code writes <code>APP_ENV=production</code> into <code>.env</code> the moment you submit that form, which force-redirects every page to HTTPS — and this setup has no SSL configured. Fix it:
+      <div class="warn"><strong>After that submission, you'll hit a "Not Found" page.</strong> This is expected: the installer's own code writes <code>APP_ENV=production</code> into <code>.env</code> the moment you submit that form, which force-redirects every page to HTTPS, and this setup has no SSL configured. Fix it:
         <ol>
           <li>Open <code>C:\xampp\htdocs\msp-helpdesk\.env</code>, change <code>APP_ENV=production</code> to <code>APP_ENV=local</code>, save.</li>
-          <li>Go directly to <code>http://localhost/install/migrate</code> (plain <code>http://</code>) to continue — do not resubmit the Database step, since that would just write <code>production</code> back in again.</li>
+          <li>Go directly to <code>http://localhost/install/migrate</code> (plain <code>http://</code>) to continue. Do not resubmit the Database step, since that would just write <code>production</code> back in again.</li>
         </ol>
       Finish the remaining Migrate → Admin → Done steps normally.</div>
     </section>
@@ -115,7 +115,7 @@ C:\xampp\php\php.exe artisan key:generate</pre>
       <h2>Linux (Ubuntu/Debian)</h2>
       <p>These steps are verified against a real Ubuntu 22.04 deployment.</p>
       <ol>
-        <li>Install PHP 8.2 (Ubuntu 22.04's default repo only has 8.1, so add the PPA first). PHP <code>^8.2</code> is required — 8.3 and 8.4 also work if you swap the version number below:
+        <li>Install PHP 8.2 (Ubuntu 22.04's default repo only has 8.1, so add the PPA first). PHP <code>^8.2</code> is required; 8.3 and 8.4 also work if you swap the version number below:
 <pre>sudo add-apt-repository ppa:ondrej/php -y
 sudo apt update
 sudo apt install php8.2-fpm php8.2-cli php8.2-mysql php8.2-mbstring \
@@ -124,9 +124,9 @@ sudo apt install php8.2-fpm php8.2-cli php8.2-mysql php8.2-mbstring \
         <li>Install and start MySQL:
 <pre>sudo apt install mysql-server -y
 sudo systemctl enable mysql --now</pre>
-          Create a database and user — replace <code>choose-a-strong-password</code> with your own password before running this:
+          Create a database and user; replace <code>choose-a-strong-password</code> with your own password before running this:
 <pre>sudo mysql -e "CREATE DATABASE msphelpdesk; CREATE USER 'msphelpdesk'@'localhost' IDENTIFIED BY 'choose-a-strong-password'; GRANT ALL PRIVILEGES ON msphelpdesk.* TO 'msphelpdesk'@'localhost'; FLUSH PRIVILEGES;"</pre>
-          Note the database name, username, and password — you'll enter them in the installer.
+          Note the database name, username, and password. You'll enter them in the installer.
         </li>
         <li>Install Nginx: <code>sudo apt install nginx -y</code></li>
         <li>Download and extract the <a href="/download.html">package</a> (the zip has no wrapping folder, so create the target directory first and unzip into it):
@@ -136,13 +136,13 @@ cd /var/www/your-app-name
 sudo curl -LO https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.45.zip
 sudo unzip msp-helpdesk-1.0.45.zip
 sudo rm msp-helpdesk-1.0.45.zip</pre>
-          Check the <a href="/download.html">download page</a> for the current version number — the URL above will go stale as new versions are released.
+          Check the <a href="/download.html">download page</a> for the current version number. The URL above will go stale as new versions are released.
         </li>
-        <li>Run these before the first visit — without them, the site returns a 500 error instead of the setup wizard (all files here are owned by <code>root</code> from the previous step, so these need <code>sudo</code>):
+        <li>Run these before the first visit; without them, the site returns a 500 error instead of the setup wizard (all files here are owned by <code>root</code> from the previous step, so these need <code>sudo</code>):
 <pre>cd /var/www/your-app-name
 sudo cp .env.example .env
 sudo php8.2 artisan key:generate</pre>
-          Then set <code>APP_URL</code> to exactly how you'll access the site in a browser — the same host you'll put in <code>server_name</code> below, including <code>http://</code>. Replace <code>your-domain-or-ip</code> with your real IP or domain:
+          Then set <code>APP_URL</code> to exactly how you'll access the site in a browser (the same host you'll put in <code>server_name</code> below, including <code>http://</code>). Replace <code>your-domain-or-ip</code> with your real IP or domain:
 <pre>sudo sed -i 's|^APP_URL=.*|APP_URL=http://your-domain-or-ip|' .env</pre>
           This matters: <code>.env.example</code> defaults <code>APP_URL</code> to <code>http://localhost</code>, and Laravel rejects any request whose Host header doesn't match it, with a 400 Bad Request. If you skip this and access the server by IP or a custom domain, you'll hit that error.
         </li>
@@ -152,7 +152,7 @@ sudo chmod -R 775 storage bootstrap/cache
 sudo chown www-data:www-data .env</pre>
           The last line matters: the setup wizard writes your database settings into <code>.env</code> directly from the browser (as <code>www-data</code>). If <code>.env</code> is still owned by <code>root</code>, that write silently fails and your settings won't actually save.
         </li>
-        <li>Create <code>/etc/nginx/sites-available/your-app-name</code> pointing at the package's <code>public/</code> folder, with PHP-FPM handling <code>.php</code> requests. Run this whole block as one command — it writes the file for you, no text editor needed. Replace <code>your-domain-or-ip</code> with the same host you set as <code>APP_URL</code> above:
+        <li>Create <code>/etc/nginx/sites-available/your-app-name</code> pointing at the package's <code>public/</code> folder, with PHP-FPM handling <code>.php</code> requests. Run this whole block as one command: it writes the file for you, no text editor needed. Replace <code>your-domain-or-ip</code> with the same host you set as <code>APP_URL</code> above:
 <pre>sudo tee /etc/nginx/sites-available/your-app-name &gt; /dev/null &lt;&lt;'EOF'
 server {
     listen 80;
@@ -167,40 +167,40 @@ server {
     }
 }
 EOF</pre>
-        <strong>Do not paste just the <code>server { ... }</code> block on its own</strong> — pasted straight into the shell without the <code>sudo tee ... &lt;&lt;'EOF'</code> wrapper, bash tries to run <code>server</code>, <code>listen</code>, etc. as commands and fails with a wall of "command not found" errors.</li>
+        <strong>Do not paste just the <code>server { ... }</code> block on its own:</strong> pasted straight into the shell without the <code>sudo tee ... &lt;&lt;'EOF'</code> wrapper, bash tries to run <code>server</code>, <code>listen</code>, etc. as commands and fails with a wall of "command not found" errors.</li>
         <li>Enable the site and reload Nginx:
 <pre>sudo ln -s /etc/nginx/sites-available/your-app-name /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx</pre>
         </li>
-        <li>If <code>ufw</code> is enabled on this server, allow HTTP first: <code>sudo ufw allow 80/tcp</code> (check with <code>sudo ufw status</code> — skip this if it says inactive).</li>
-        <li>Visit the site in a browser — the setup wizard loads and shows a system requirements check. Continue to the Database &amp; Site Setup form and enter the Site URL (same value as <code>APP_URL</code>), Database Host <code>127.0.0.1</code>, Port <code>3306</code>, and the database name/username/password from step 2. Click <strong>Test Connection &amp; Continue</strong>.</li>
+        <li>If <code>ufw</code> is enabled on this server, allow HTTP first: <code>sudo ufw allow 80/tcp</code> (check with <code>sudo ufw status</code>; skip this if it says inactive).</li>
+        <li>Visit the site in a browser. The setup wizard loads and shows a system requirements check. Continue to the Database &amp; Site Setup form and enter the Site URL (same value as <code>APP_URL</code>), Database Host <code>127.0.0.1</code>, Port <code>3306</code>, and the database name/username/password from step 2. Click <strong>Test Connection &amp; Continue</strong>.</li>
       </ol>
-      <div class="warn"><strong>After that submission, you may hit a "Not Found" page.</strong> This is expected if you don't have SSL configured (e.g. an internal/staging box): the installer's own code writes <code>APP_ENV=production</code> into <code>.env</code> the moment you submit that form, which force-redirects every page to HTTPS — and without SSL nothing is listening on port 443. Fix it:
+      <div class="warn"><strong>After that submission, you may hit a "Not Found" page.</strong> This is expected if you don't have SSL configured (e.g. an internal/staging box): the installer's own code writes <code>APP_ENV=production</code> into <code>.env</code> the moment you submit that form, which force-redirects every page to HTTPS, and without SSL nothing is listening on port 443. Fix it:
         <ol>
           <li>Run: <code>sudo -u www-data sed -i 's/^APP_ENV=production/APP_ENV=local/' /var/www/your-app-name/.env</code></li>
-          <li>Go directly to <code>http://your-domain-or-ip/install/migrate</code> (plain <code>http://</code>) to continue — do not resubmit the Database step, since that would just write <code>production</code> back in again.</li>
+          <li>Go directly to <code>http://your-domain-or-ip/install/migrate</code> (plain <code>http://</code>) to continue. Do not resubmit the Database step, since that would just write <code>production</code> back in again.</li>
         </ol>
-      Finish the remaining Migrate → Admin → Done steps normally. On a real deployment with SSL configured, leave <code>APP_ENV=production</code> — that's correct there.</div>
+      Finish the remaining Migrate → Admin → Done steps normally. On a real deployment with SSL configured, leave <code>APP_ENV=production</code>. That's correct there.</div>
     </section>
 
     <section class="platform" id="hosting">
       <div class="kicker">Shared Hosting</div>
       <h2>Namecheap, HostGator &amp; Similar (cPanel) Hosting</h2>
       <ol>
-        <li>Confirm your hosting plan supports <strong>PHP 8.2</strong> — in cPanel, use <strong>Select PHP Version</strong> (sometimes called "MultiPHP Manager") to set it for your domain, and enable the extensions listed on the <a href="/download.html">download page</a> if any show as off.</li>
+        <li>Confirm your hosting plan supports <strong>PHP 8.2</strong>: in cPanel, use <strong>Select PHP Version</strong> (sometimes called "MultiPHP Manager") to set it for your domain, and enable the extensions listed on the <a href="/download.html">download page</a> if any show as off.</li>
         <li>Create a MySQL database and database user in cPanel's <strong>MySQL Database Wizard</strong>, and note the database name, username, and password it generates (shared hosts commonly prefix these with your account username automatically).</li>
-        <li>Upload the <a href="/download.html">package</a> via cPanel's <strong>File Manager</strong> (upload the zip, then use its built-in "Extract" option) or via FTP, into a folder outside your domain's public web root — e.g. a sibling folder next to <code>public_html</code>, not inside it.</li>
+        <li>Upload the <a href="/download.html">package</a> via cPanel's <strong>File Manager</strong> (upload the zip, then use its built-in "Extract" option) or via FTP, into a folder outside your domain's public web root, e.g. a sibling folder next to <code>public_html</code>, not inside it.</li>
         <li>
           The app's structure expects the web server to point at its <code>public/</code> subfolder specifically, but most shared hosting points your domain straight at <code>public_html</code>. Two ways to handle this, in order of preference:
           <ul>
-            <li><strong>If you're installing to a subdomain or addon domain</strong>: most cPanel setups let you choose a custom document root when creating it — point it directly at the package's <code>public</code> folder.</li>
+            <li><strong>If you're installing to a subdomain or addon domain</strong>: most cPanel setups let you choose a custom document root when creating it: point it directly at the package's <code>public</code> folder.</li>
             <li><strong>If you must use the account's main <code>public_html</code></strong>: move everything from inside the package's <code>public</code> folder up into <code>public_html</code>, then edit the two <code>require</code> lines in <code>public_html/index.php</code> so they point one directory further up to where the rest of the app (the <code>vendor</code> and <code>bootstrap</code> folders) actually lives.</li>
           </ul>
         </li>
         <li>Visit your domain in a browser and complete the installer using the database details from step 2.</li>
       </ol>
-      <div class="note">Most reputable hosts (including Namecheap and HostGator) provision free SSL automatically (AutoSSL / Let's Encrypt) — on this kind of hosting the installer's HTTPS behavior is generally correct out of the box and needs no adjustment, unlike a bare local/internal server.</div>
+      <div class="note">Most reputable hosts (including Namecheap and HostGator) provision free SSL automatically (AutoSSL / Let's Encrypt): on this kind of hosting the installer's HTTPS behavior is generally correct out of the box and needs no adjustment, unlike a bare local/internal server.</div>
     </section>
 
   </div>
