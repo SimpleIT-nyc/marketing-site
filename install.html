@@ -66,16 +66,16 @@ footer{border-top:1px solid var(--line-default);padding:32px 0;text-align:center
       <h2>Windows (XAMPP)</h2>
       <p>These steps are verified against a real Windows 10 VM running XAMPP.</p>
       <ol>
-        <li>Install <strong>XAMPP for Windows 8.2.12</strong>: <a href="https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe">download link</a> (uninstall any older XAMPP first). The app requires PHP <code>^8.2</code>: 8.2, 8.3, and 8.4 all work; older versions will not run it.</li>
-        <li>Open <code>C:\xampp\php\php.ini</code>. Confirm these two lines have no <code>;</code> in front (XAMPP 8.2.12 ships with both already enabled by default, just double-check):
+        <li>Install <strong>XAMPP for Windows 8.2.12</strong>: <a href="https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/">download link</a> (uninstall any older XAMPP first). SourceForge reorganizes its file paths over time, which breaks deep links to a specific installer; this folder listing stays valid, click the green <strong>Download Latest Version</strong> button on it (it matched 8.2.12 when we last checked). The app requires PHP <code>^8.2</code>: 8.2, 8.3, and 8.4 all work; older versions will not run it.</li>
+        <li>Open <code>C:\xampp\php\php.ini</code>. Find these two lines and remove the leading <code>;</code> from each, then save. This step is required, not optional: XAMPP 8.2.12 ships with <strong>both commented out</strong> by default, and without it the installer's system-requirements check fails on the <code>openssl</code> and <code>imap</code> extensions:
 <pre>extension=openssl
 extension=imap</pre>
-        If either has a <code>;</code> in front, remove it and save.</li>
-        <li>Open XAMPP Control Panel, start <strong>Apache</strong> and <strong>MySQL</strong>.</li>
+        </li>
+        <li>Open XAMPP Control Panel, start <strong>Apache</strong> and <strong>MySQL</strong>. Windows Firewall will likely prompt once for each, asking to allow it through; click <strong>Allow access</strong>.</li>
         <li>Go to <code>http://localhost/phpmyadmin</code> and create a new database. Note its name.</li>
         <li>Download the <a href="/download.html">package</a> and extract it to:
 <pre>C:\xampp\htdocs\msp-helpdesk</pre>
-        </li>
+        If Windows Explorer's extractor refuses with "the destination folder path is invalid," that's because the <code>msp-helpdesk</code> folder doesn't exist yet and the built-in extractor won't create it for you: create that empty folder first, then re-run Extract and browse to it.</li>
         <li>Open Command Prompt and run:
 <pre>cd C:\xampp\htdocs\msp-helpdesk
 copy .env.example .env
