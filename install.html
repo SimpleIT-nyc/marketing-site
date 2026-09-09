@@ -124,7 +124,7 @@ sudo apt install php8.2-fpm php8.2-cli php8.2-mysql php8.2-mbstring \
         <li>Install and start MySQL:
 <pre>sudo apt install mysql-server -y
 sudo systemctl enable mysql --now</pre>
-          Create a database and user; replace <code>choose-a-strong-password</code> with your own password before running this:
+          Create a database and user; replace <code>choose-a-strong-password</code> with your own password before running this. <strong>Avoid <code>!</code> and <code>`</code> in this password</strong>: pasted inside double quotes like this, bash treats <code>!</code> as history expansion and silently breaks the whole command (you'll see <code>bash: !': event not found</code> and nothing gets created), with nothing about the error pointing back to the password as the cause:
 <pre>sudo mysql -e "CREATE DATABASE msphelpdesk; CREATE USER 'msphelpdesk'@'localhost' IDENTIFIED BY 'choose-a-strong-password'; GRANT ALL PRIVILEGES ON msphelpdesk.* TO 'msphelpdesk'@'localhost'; FLUSH PRIVILEGES;"</pre>
           Note the database name, username, and password. You'll enter them in the installer.
         </li>
@@ -178,7 +178,7 @@ sudo systemctl reload nginx</pre>
       </ol>
       <div class="warn"><strong>After that submission, you may hit a "Not Found" page.</strong> This is expected if you don't have SSL configured (e.g. an internal/staging box): the installer's own code writes <code>APP_ENV=production</code> into <code>.env</code> the moment you submit that form, which force-redirects every page to HTTPS, and without SSL nothing is listening on port 443. Fix it:
         <ol>
-          <li>Run: <code>sudo -u www-data sed -i 's/^APP_ENV=production/APP_ENV=local/' /var/www/your-app-name/.env</code></li>
+          <li>Run: <code>sudo sed -i 's/^APP_ENV=production/APP_ENV=local/' /var/www/your-app-name/.env</code> (run this as <code>root</code> via plain <code>sudo</code>, not <code>sudo -u www-data</code>: <code>sed -i</code> needs write access to the folder to create its temp file, which <code>www-data</code> doesn't have here. Running it as root still leaves <code>.env</code> owned by <code>www-data</code> afterward, since <code>sed</code> preserves the original owner.)</li>
           <li>Go directly to <code>http://your-domain-or-ip/install/migrate</code> (plain <code>http://</code>) to continue. Do not resubmit the Database step, since that would just write <code>production</code> back in again.</li>
         </ol>
       Finish the remaining Migrate → Admin → Done steps normally. On a real deployment with SSL configured, leave <code>APP_ENV=production</code>. That's correct there.</div>
