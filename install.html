@@ -108,6 +108,9 @@ C:\xampp\php\php.exe artisan key:generate</pre>
           <li>Go directly to <code>http://localhost/install/migrate</code> (plain <code>http://</code>) to continue. Do not resubmit the Database step, since that would just write <code>production</code> back in again.</li>
         </ol>
       Finish the remaining Migrate → Admin → Done steps normally.</div>
+      <div class="note"><strong>Last step: turn on the scheduler (required for updates).</strong> Email polling, SLA timers and in-app updates (manual and automatic) all run from a job that must fire every minute. Without it, Settings &rarr; System Updates shows a red "scheduler is not running" warning and the Install button stays disabled. Open <strong>Command Prompt as Administrator</strong> and run this single command (adjust the paths if XAMPP or the app is installed elsewhere):
+<pre>schtasks /create /tn "MSP Helpdesk Scheduler" /sc minute /mo 1 /ru SYSTEM /tr "C:\xampp\php\php.exe C:\xampp\htdocs\msp-helpdesk\artisan schedule:run"</pre>
+      Within a minute the warning on the Updates tab disappears.</div>
     </section>
 
     <section class="platform" id="linux">
@@ -118,8 +121,9 @@ C:\xampp\php\php.exe artisan key:generate</pre>
         <li>Install PHP 8.2 (Ubuntu 22.04's default repo only has 8.1, so add the PPA first). PHP <code>^8.2</code> is required; 8.3 and 8.4 also work if you swap the version number below:
 <pre>sudo add-apt-repository ppa:ondrej/php -y
 sudo apt update
-sudo apt install php8.2-fpm php8.2-cli php8.2-mysql php8.2-mbstring \
-  php8.2-xml php8.2-curl php8.2-zip php8.2-gd php8.2-bcmath php8.2-intl php8.2-imap -y</pre>
+sudo apt install php8.2-fpm php8.2-cli php8.2-mysql php8.2-mbstring php8.2-xml php8.2-curl php8.2-zip php8.2-gd php8.2-bcmath php8.2-intl php8.2-imap -y</pre>
+          The install command is deliberately one long line: when a multi-line command with backslashes is pasted into some web terminals, the trailing <code>-y</code> gets dropped and apt stops to ask a question.
+          <strong>On Ubuntu 24.04</strong> (which ships PHP 8.3), skip the PPA and use 8.3 everywhere instead: replace every <code>php8.2</code> with <code>php8.3</code> in this guide, including <code>php8.3-fpm.sock</code> in the Nginx config and <code>sudo php8.3 artisan</code> below.
         </li>
         <li>Install and start MySQL:
 <pre>sudo apt install mysql-server -y
@@ -133,10 +137,11 @@ sudo systemctl enable mysql --now</pre>
 <pre>sudo apt install curl unzip -y
 sudo mkdir -p /var/www/your-app-name
 cd /var/www/your-app-name
-sudo curl -LO https://updates.simpleit.nyc/releases/msp-helpdesk-1.0.45.zip
-sudo unzip msp-helpdesk-1.0.45.zip
-sudo rm msp-helpdesk-1.0.45.zip</pre>
-          Check the <a href="/download.html">download page</a> for the current version number. The URL above will go stale as new versions are released.
+VER=$(curl -s https://updates.simpleit.nyc/latest.json | grep -oP '"version": *"\K[^"]+')
+sudo curl -LO https://updates.simpleit.nyc/releases/msp-helpdesk-$VER.zip
+sudo unzip msp-helpdesk-$VER.zip
+sudo rm msp-helpdesk-$VER.zip</pre>
+          The first line looks up the current release number from the update feed, so these commands never go stale. Run all four lines in the same terminal session. You can also pick a specific version from the <a href="/archive.html">version archive</a>.
         </li>
         <li>Run these before the first visit; without them, the site returns a 500 error instead of the setup wizard (all files here are owned by <code>root</code> from the previous step, so these need <code>sudo</code>):
 <pre>cd /var/www/your-app-name
@@ -178,10 +183,13 @@ sudo systemctl reload nginx</pre>
       </ol>
       <div class="warn"><strong>After that submission, you may hit a "Not Found" page.</strong> This is expected if you don't have SSL configured (e.g. an internal/staging box): the installer's own code writes <code>APP_ENV=production</code> into <code>.env</code> the moment you submit that form, which force-redirects every page to HTTPS, and without SSL nothing is listening on port 443. Fix it:
         <ol>
-          <li>Run: <code>sudo sed -i 's/^APP_ENV=production/APP_ENV=local/' /var/www/your-app-name/.env</code> (run this as <code>root</code> via plain <code>sudo</code>, not <code>sudo -u www-data</code>: <code>sed -i</code> needs write access to the folder to create its temp file, which <code>www-data</code> doesn't have here. Running it as root still leaves <code>.env</code> owned by <code>www-data</code> afterward, since <code>sed</code> preserves the original owner.)</li>
+          <li>Run: <code>sudo sed -i 's/^APP_ENV=production/APP_ENV=local/' /var/www/your-app-name/.env</code> (replace <code>your-app-name</code> with the folder you created in step 4; run this as <code>root</code> via plain <code>sudo</code>, not <code>sudo -u www-data</code>: <code>sed -i</code> needs write access to the folder to create its temp file, which <code>www-data</code> doesn't have here. Running it as root still leaves <code>.env</code> owned by <code>www-data</code> afterward, since <code>sed</code> preserves the original owner.)</li>
           <li>Go directly to <code>http://your-domain-or-ip/install/migrate</code> (plain <code>http://</code>) to continue. Do not resubmit the Database step, since that would just write <code>production</code> back in again.</li>
         </ol>
       Finish the remaining Migrate → Admin → Done steps normally. On a real deployment with SSL configured, leave <code>APP_ENV=production</code>. That's correct there.</div>
+      <div class="note"><strong>Last step: turn on the scheduler (required for updates).</strong> Email polling, SLA timers and in-app updates (manual and automatic) all run from a job that must fire every minute. Without it, Settings &rarr; System Updates shows a red "scheduler is not running" warning and the Install button stays disabled. One command creates it (replace <code>your-app-name</code> with your folder name, and use <code>php8.3</code> on Ubuntu 24.04):
+<pre>echo "* * * * * www-data cd /var/www/your-app-name &amp;&amp; php8.2 artisan schedule:run >> /dev/null 2>&amp;1" | sudo tee /etc/cron.d/msp-helpdesk</pre>
+      Within a minute the warning on the Updates tab disappears. If <code>cron</code> isn't installed, run <code>sudo apt install cron -y</code> first.</div>
     </section>
 
     <section class="platform" id="hosting">
@@ -199,6 +207,9 @@ sudo systemctl reload nginx</pre>
           </ul>
         </li>
         <li>Visit your domain in a browser and complete the installer using the database details from step 2.</li>
+        <li><strong>Add the cron job (required for updates).</strong> In cPanel open <strong>Cron Jobs</strong>, set every time field to <code>*</code> (every minute) and use this command, replacing <code>yourusername</code> and the folder with your own (if <code>/usr/local/bin/php</code> doesn't exist, try <code>/opt/cpanel/ea-php82/root/usr/bin/php</code>):
+<pre>/usr/local/bin/php /home/yourusername/your-app-folder/artisan schedule:run >> /dev/null 2>&amp;1</pre>
+          Email polling, SLA timers and in-app updates all depend on it. Without it, Settings &rarr; System Updates shows a red "scheduler is not running" warning and the Install button stays disabled.</li>
       </ol>
       <div class="note">Most reputable hosts (including Namecheap and HostGator) provision free SSL automatically (AutoSSL / Let's Encrypt): on this kind of hosting the installer's HTTPS behavior is generally correct out of the box and needs no adjustment, unlike a bare local/internal server.</div>
     </section>
